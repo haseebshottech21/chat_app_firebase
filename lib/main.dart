@@ -3,6 +3,8 @@ import 'package:firebase_chatapp/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_notification_channel/flutter_notification_channel.dart';
+import 'package:flutter_notification_channel/notification_importance.dart';
 
 //global object for accessing device screen size
 late Size mq;
@@ -20,7 +22,6 @@ void main() {
     _initializeFirebase();
     runApp(const MyApp());
   });
-  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -48,7 +49,13 @@ class MyApp extends StatelessWidget {
 }
 
 _initializeFirebase() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  var result = await FlutterNotificationChannel.registerNotificationChannel(
+    description: 'For Showing Message Notification',
+    id: 'chats',
+    importance: NotificationImportance.IMPORTANCE_HIGH,
+    name: 'Chats',
   );
+  print('Notification channel result: $result');
 }

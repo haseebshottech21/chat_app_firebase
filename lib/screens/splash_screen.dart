@@ -21,9 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () {
       //exit full-screen
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
           systemNavigationBarColor: Colors.white,
-          statusBarColor: Colors.white));
+          statusBarColor: Colors.white,
+        ),
+      );
 
       if (APIs.auth.currentUser != null) {
         //navigate to home screen
@@ -45,6 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          // App logo
           Positioned(
             top: mq.height * .15,
             right: mq.width * .35,
